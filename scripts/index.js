@@ -6,40 +6,47 @@ var two = new Two({
 
 elem.style.border = "1px solid black";
 
-let head = two.makeEllipse(250, 250, 150, 100);
-let eyes = two.makeGroup(
-    two.makeEllipse(head.translation.x - head.width/2, head.translation.y, 20, 20),
-    two.makeEllipse(head.translation.x + head.width/2, head.translation.y, 20, 20),
-); 
 
 function getRandomBoolean() {
     var randomNumber = Math.random() >= 0.5;
     return randomNumber;
 }
 
-let shouldGrow;
-
-
-function c(part, attr, min, max){
-    if (shouldGrow){
-        part[attr]++; 
+var body = {
+    head: {
+        x: 250,
+        y: 250, 
+        width: 150, 
+        height: 150,
+        shouldChangeWidth: true,
+        shouldChangeHeight: false,
+        draw: two.makeEllipse(250, 250, 150, 150)
     }
-    else if (!shouldGrow) {
-        part[attr]--;
+}
+
+function change(part, attr, min, max, deltaMin, deltaMax, x){
+    let delta = Math.random() * (deltaMax - deltaMin) + deltaMin;
+
+    if (part[x]){
+        part[attr] += delta; 
+    }
+
+    else if (!part[x]) {
+        part[attr] -= delta;
     }
 
     if (part[attr] <= min){
-        shouldGrow = true;
+        part[x] = true;
     }
     else if (part[attr] >= max) {
-        shouldGrow = false;
+        part[x] = false;
     }
-
 }
 
 two.bind('update', function(frameCount) {
-    c(head, "width", 150, 400);
-    c(head, "height", 150, 400);
+    change(body.head.draw, "width", 250, 450, 1, .5, body.head.shouldChangeWidth);
+    change(body.head.draw, "height", 250, 450, 4, .5, body.head.shouldChangeHeight);
+    
 }).play();  // Finally, start the animation loop
 
 
