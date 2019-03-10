@@ -52,6 +52,10 @@ pupils.fill = 'black';
 eyes.linewidth = 10;
 
 
+let leftEye = two.makeGroup(eyes.children[0], pupils.children[0]);
+// let rightEye = two.makeGroup(eyes.children[1], pupils.children[1]);
+
+
 
 
 function change(part, attr, min, max, deltaMin, deltaMax, x) {
@@ -84,7 +88,12 @@ two.bind('update', function (frameCount) {
     change(head.vertices[7], "y", parseInt(-250), parseInt(20), parseInt(1), parseInt(.5), body.head.shouldChangeHeight);
     change(head.vertices[4], "y", parseInt(100), parseInt(250), parseInt(0), parseInt(1), body.head.shouldChangeWidth);
 
+    change(leftEye.translation, "x", -50, 50, 0, 1, body.head.shouldChangeWidth);
+    change(leftEye.translation, "y", -50, 50, 0, 1, body.head.shouldChangeWidth);
+
+    // rightEye.translation.x++;
 }).play(); // Finally, start the animation loop
+
 
 
 two.update();
