@@ -44,16 +44,15 @@ let head = body.head.draw;
 head.linewidth = 10;
 head.fill = '#1faabc';
 
-let eyes = two.makeGroup(body.eyes.left.draw, body.eyes.right.draw);
-let pupils = two.makeGroup(body.eyes.left.pupil, body.eyes.right.pupil);
 
 
-pupils.fill = 'black';
-eyes.linewidth = 10;
+let leftEye = two.makeGroup(body.eyes.left.draw, body.eyes.left.pupil);
+let rightEye = two.makeGroup(body.eyes.right.draw, body.eyes.right.pupil);
 
-
-let leftEye = two.makeGroup(eyes.children[0], pupils.children[0]);
-// let rightEye = two.makeGroup(eyes.children[1], pupils.children[1]);
+leftEye.linewidth = 10;
+rightEye.linewidth = 10;
+leftEye.children[1].fill = 'black';
+rightEye.children[1].fill = 'black';
 
 
 
@@ -91,7 +90,10 @@ two.bind('update', function (frameCount) {
     change(leftEye.translation, "x", -50, 50, 0, 1, body.head.shouldChangeWidth);
     change(leftEye.translation, "y", -50, 50, 0, 1, body.head.shouldChangeWidth);
 
-    // rightEye.translation.x++;
+    change(rightEye.translation, "x", 0, 50, 0, 1, body.head.shouldChangeHeight);
+    change(rightEye.translation, "y", 0, 50, 0, 1, body.head.shouldChangeHeight);
+
+    
 }).play(); // Finally, start the animation loop
 
 
