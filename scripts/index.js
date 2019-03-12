@@ -40,36 +40,47 @@ var body = {
             draw: two.makeEllipse(250 - 100, 250 - 50, 30, 30),
             pupil: two.makeCircle(250 - 100, 250 - 50, 5, 5),
             eyebrow: two.makeCurve(
-                250 - 140, 250 - 100, // 0
-                250 - 120, 250 - 120, // 1
-                250 - 80, 250 - 120, // 2
-                250 - 60, 250 - 100, // 3
-                true)
+                170 - 50, 150, // 0 
+                170 - 25, 140, // 1
+                170, 138, // 2
+                170 + 25, 140, // 3
+                170 + 50, 150, // 4
+                true
+              )
+              
         },
         right: {
             draw: two.makeEllipse(250 + 100, 250 - 50, 30, 30),
             pupil: two.makeCircle(250 + 100, 250 - 50, 5, 5),
             eyebrow: two.makeCurve(
-                250 + 140, 250 - 100, // 0
-                250 + 120, 250 - 120, // 1
-                250 + 80, 250 - 120, // 2
-                250 + 60, 250 - 100, // 3
-                true)
+                330 - 60, 150, // 0 
+                330 - 25, 140, // 1
+                330, 138, // 2
+                330 + 25, 140, // 3
+                330 + 60, 150, // 4
+                true
+              )
 
         }
     },
     nose: {
+        draw: two.makePolygon(250, 250, 15, 3)
+    }, 
+    mouth: {
         draw: two.makeCurve(
-            250 - 25, 250,
-            250, 350,
-            250 + 25, 250,
+            250 - 50, 355, // 0
+            250 - 25, 370, // 1
+            250, 375, // 2
+            250 + 25, 370, // 3
+            250 + 50, 355, // 4
             true)
     }
 }
 
 let head = body.head.draw;
 head.linewidth = 15;
-head.fill = '#1faabc';
+head.fill = '#B3B3F1';
+head.stroke = '#CEC2FF';
 
 let leftEye = two.makeGroup(body.eyes.left.draw, body.eyes.left.pupil, body.eyes.left.eyebrow);
 let rightEye = two.makeGroup(body.eyes.right.draw, body.eyes.right.pupil, body.eyes.right.eyebrow);
@@ -80,10 +91,16 @@ leftEye.children[1].fill = 'black';
 rightEye.children[1].fill = 'black';
 leftEye.children[2].fill = 'none';
 rightEye.children[2].fill = 'none';
+leftEye.children[2].linewidth = 30;
+rightEye.children[2].linewidth = 30;
 
 let nose = body.nose.draw; 
-nose.fill = 'none'; 
+nose.fill = 'pink'; 
 nose.linewidth = 15;
+
+let mouth = body.mouth.draw;
+mouth.fill = 'none'
+mouth.linewidth = 15;
 
 
 
@@ -106,6 +123,7 @@ function change(part, attr, min, max, deltaMin, deltaMax, x) {
 two.bind('update', function (frameCount) {
     animateHead();
     animateEyes();
+    animateNose();
 }).play(); // Finally, start the animation loop
 
 
