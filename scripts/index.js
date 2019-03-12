@@ -78,15 +78,15 @@ var body = {
 }
 
 let head = body.head.draw;
-head.linewidth = 15;
+head.linewidth = 20;
 head.fill = '#B3B3F1';
 head.stroke = '#CEC2FF';
 
 let leftEye = two.makeGroup(body.eyes.left.draw, body.eyes.left.pupil, body.eyes.left.eyebrow);
 let rightEye = two.makeGroup(body.eyes.right.draw, body.eyes.right.pupil, body.eyes.right.eyebrow);
 
-leftEye.linewidth = 15;
-rightEye.linewidth = 15;
+leftEye.linewidth = 10;
+rightEye.linewidth = 10;
 leftEye.children[1].fill = 'black';
 rightEye.children[1].fill = 'black';
 leftEye.children[2].fill = 'none';
@@ -96,11 +96,12 @@ rightEye.children[2].linewidth = 30;
 
 let nose = body.nose.draw; 
 nose.fill = 'pink'; 
-nose.linewidth = 15;
+nose.stroke = 'black';
+nose.linewidth = 10;
 
 let mouth = body.mouth.draw;
 mouth.fill = 'none'
-mouth.linewidth = 15;
+mouth.linewidth = 10;
 
 
 

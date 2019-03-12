@@ -25,11 +25,6 @@ function animateEyes () {
     change(rightEye.translation, "x", 0, 70, 0, 1, body.shouldNotChange);
     change(rightEye.translation, "y", -50, 50, 0, 1, body.shouldChange);
 
-    change(leftEye.children[0], "width", 40, 70, 0, .5, body.shouldNotChange);
-    change(leftEye.children[0], "height", 40, 70, 0, .5, body.shouldChange);
-    change(rightEye.children[0], "width", 40, 70, 0, .5, body.shouldNotChange);
-    change(rightEye.children[0], "height", 40, 70, 0, .5, body.shouldChange);
-
     for (i = 0; i <= 4; i++){
         change(leftEye.children[2].vertices[i], "y", -15, 15, 0, .5, body.shouldChange);
         change(rightEye.children[2].vertices[i], "y", -15, 15, 0, .5, body.shouldChange);
