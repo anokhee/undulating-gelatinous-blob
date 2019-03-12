@@ -3,7 +3,7 @@ var two = new Two({
 
 }).appendTo(elem);
 
-/* BEGIN ELEM STYLES */ 
+/* BEGIN ELEM STYLES */
 
 elem.style.border = "10px solid black";
 elem.style.background = '#2f5a5c';
@@ -16,12 +16,12 @@ function getRandomBoolean() {
 }
 
 var body = {
-    shouldChange: true, 
+    shouldChange: true,
     shouldNotChange: false,
     head: {
         draw: two.makeCurve(
             230, 50,
-            50, 100, 
+            50, 100,
             75, 200,
             100, 300,
             140, 365,
@@ -57,24 +57,33 @@ var body = {
                 true)
 
         }
+    },
+    nose: {
+        draw: two.makeCurve(
+            250 - 25, 250,
+            250, 350,
+            250 + 25, 250,
+            true)
     }
 }
 
 let head = body.head.draw;
-head.linewidth = 10;
+head.linewidth = 15;
 head.fill = '#1faabc';
-
 
 let leftEye = two.makeGroup(body.eyes.left.draw, body.eyes.left.pupil, body.eyes.left.eyebrow);
 let rightEye = two.makeGroup(body.eyes.right.draw, body.eyes.right.pupil, body.eyes.right.eyebrow);
 
-leftEye.linewidth = 10;
-rightEye.linewidth = 10;
+leftEye.linewidth = 15;
+rightEye.linewidth = 15;
 leftEye.children[1].fill = 'black';
 rightEye.children[1].fill = 'black';
 leftEye.children[2].fill = 'none';
 rightEye.children[2].fill = 'none';
 
+let nose = body.nose.draw; 
+nose.fill = 'none'; 
+nose.linewidth = 15;
 
 
 
