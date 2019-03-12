@@ -31,13 +31,13 @@ function animateEyes () {
     }
 }
 
-function animateNose () {
-    for (i = 0; i <= 4; i++){
-        
-        if (i < 2){
-            change(mouth.vertices[i], "y", -20, 0, 0, .5, body.shouldChange);
-        } else if (i > 2) {
-            change(mouth.vertices[i], "y", 0, 20, 0, .5, body.shouldChange);
-        }
-    }
-}
+// function animateNose () {
+//     change(nose, 'rotation', -.25, .25, 0, .025, body.shouldChange);
+//     for (i = 0; i <= 4; i++){ 
+//         if (i < 2){
+//             change(mouth.vertices[i], "y", -20, 0, 0, .05, body.shouldChange);
+//         } else if (i > 2) {
+//             change(mouth.vertices[i], "y", 0, 20, 0, .5, body.shouldChange);
+//         }
+//     }
+// }

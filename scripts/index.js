@@ -63,18 +63,18 @@ var body = {
 
         }
     },
-    nose: {
-        draw: two.makePolygon(250, 250, 15, 3)
-    }, 
-    mouth: {
-        draw: two.makeCurve(
-            250 - 50, 355, // 0
-            250 - 25, 370, // 1
-            250, 375, // 2
-            250 + 25, 370, // 3
-            250 + 50, 355, // 4
-            true)
-    }
+    // nose: {
+    //     draw: two.makePolygon(250, 250, 15, 3)
+    // }, 
+    // mouth: {
+    //     draw: two.makeCurve(
+    //         250 - 50, 355, // 0
+    //         250 - 25, 370, // 1
+    //         250, 375, // 2
+    //         250 + 25, 370, // 3
+    //         250 + 50, 355, // 4
+    //         true)
+    // }
 }
 
 let head = body.head.draw;
@@ -94,14 +94,14 @@ rightEye.children[2].fill = 'none';
 leftEye.children[2].linewidth = 30;
 rightEye.children[2].linewidth = 30;
 
-let nose = body.nose.draw; 
-nose.fill = 'pink'; 
-nose.stroke = 'black';
-nose.linewidth = 10;
+// let nose = body.nose.draw; 
+// nose.fill = 'pink'; 
+// nose.stroke = 'black';
+// nose.linewidth = 10;
 
-let mouth = body.mouth.draw;
-mouth.fill = 'none'
-mouth.linewidth = 10;
+// let mouth = body.mouth.draw;
+// mouth.fill = 'none'
+// mouth.linewidth = 10;
 
 
 
@@ -124,9 +124,8 @@ function change(part, attr, min, max, deltaMin, deltaMax, x) {
 two.bind('update', function (frameCount) {
     animateHead();
     animateEyes();
-    animateNose();
-}).play(); // Finally, start the animation loop
-
+    // animateNose();
+}).play();
 
 
 two.update();
