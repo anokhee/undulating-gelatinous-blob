@@ -1,5 +1,18 @@
-#draw-face {
-    width: 700px;
-    height: 900px;
+body{
+    background-color: #ccc;
+}
+.main-container {
+    display: block;
+    width: 1000px;
     margin: 0 auto;
+}
+#draw-face {
+    border: 1px solid black;
+}
+#custom-ui {
+    display: none;
+    width: 500px; 
+    height: 500px; 
+    border: 1px solid black;
+    background-color: grey;   
 }

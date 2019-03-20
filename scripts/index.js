@@ -1,7 +1,11 @@
 var elem = document.getElementById('draw-face');
-var two = new Two({
+var params = {
+    width: 1000,
+    height: 600
+};
+var two = new Two(params).appendTo(elem);
 
-}).appendTo(elem);
+elem.style.border = '1px solid #ccc';
 
 function getRandomBoolean() {
     var randomNumber = Math.random() >= 0.5;
@@ -13,19 +17,19 @@ var body = {
     shouldNotChange: false,
     head: {
         draw: two.makeCurve(
-            230, 50,
-            50, 100,
-            75, 200,
-            100, 300,
-            140, 365,
-            180, 430,
-            250, 450,
-            320, 430,
-            360, 365,
-            400, 300,
-            425, 200,
-            450, 100,
-            280, 50,
+            230, 50, // 0
+            50, 100, // 1
+            75, 200, // 2
+            100, 300, // 3
+            140, 365, // 4
+            180, 430, // 5
+            250, 450, // 6
+            320, 430, // 7
+            360, 365, // 8
+            400, 300, // 9
+            425, 200, // 10
+            450, 100, // 11
+            280, 50, //12
             false)
     },
     eyes: {
@@ -39,8 +43,8 @@ var body = {
                 170 + 25, 140, // 3
                 170 + 50, 150, // 4
                 true
-              )
-              
+            )
+
         },
         right: {
             draw: two.makeEllipse(250 + 100, 250 - 50, 30, 30),
@@ -52,44 +56,19 @@ var body = {
                 330 + 25, 140, // 3
                 330 + 60, 150, // 4
                 true
-              )
-
-        }
-    }
+            )
+        },
+    },
 }
 
-var colors = [
-    'rgb(45, 92, 168)',
-    'rgb(198, 220, 255)',
-    'rgb(204, 183, 144)',
-    'rgb(255, 253, 249)',
-    'rgb(0, 0, 0)',
-    'rgb(50, 50, 50)'
-]
-
-var bodyGradient = two.makeLinearGradient(
-    - two.width / 2, - two.height / 2,
-    two.width / 2, two.height / 2,
-    new Two.Stop(0, colors[0]), 
-    new Two.Stop(1, colors[1])
-);
 
 let head = body.head.draw;
 
 let leftEye = two.makeGroup(body.eyes.left.draw, body.eyes.left.pupil, body.eyes.left.eyebrow);
 let rightEye = two.makeGroup(body.eyes.right.draw, body.eyes.right.pupil, body.eyes.right.eyebrow);
-
-var eyesGradient = two.makeLinearGradient(
-    - leftEye.children[0].width / 5, - leftEye.children[0].height / 5,
-    leftEye.children[0].width / 5, leftEye.children[0].height / 5,
-    new Two.Stop(0, colors[2]), 
-    new Two.Stop(1, colors[3])
-);
-
-
-
 let faceGroup = two.makeGroup(head, leftEye, rightEye);
-faceGroup.translation.x += 100;
+faceGroup.translation.x += 300;
+faceGroup.translation.y += 50;
 
 function change(part, attr, min, max, deltaMin, deltaMax, x) {
     let delta = Math.random() * (deltaMax - deltaMin) + deltaMin;
