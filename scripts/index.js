@@ -19,7 +19,7 @@ var body = {
         draw: two.makeCurve(
             230, 50, // 0
             50, 100, // 1
-            75, 200, // 2
+      
             100, 300, // 3
             140, 365, // 4
             180, 430, // 5
@@ -27,7 +27,7 @@ var body = {
             320, 430, // 7
             360, 365, // 8
             400, 300, // 9
-            425, 200, // 10
+          
             450, 100, // 11
             280, 50, //12
             false)
@@ -67,8 +67,6 @@ let head = body.head.draw;
 let leftEye = two.makeGroup(body.eyes.left.draw, body.eyes.left.pupil, body.eyes.left.eyebrow);
 let rightEye = two.makeGroup(body.eyes.right.draw, body.eyes.right.pupil, body.eyes.right.eyebrow);
 let faceGroup = two.makeGroup(head, leftEye, rightEye);
-faceGroup.translation.x += 300;
-faceGroup.translation.y += 50;
 
 function change(part, attr, min, max, deltaMin, deltaMax, x) {
     let delta = Math.random() * (deltaMax - deltaMin) + deltaMin;
@@ -85,6 +83,9 @@ function change(part, attr, min, max, deltaMin, deltaMax, x) {
         part[x] = false;
     }
 }
+
+faceGroup.translation.x += 300;
+faceGroup.translation.y += 50;
 
 two.bind('update', function (frameCount) {
     animateHead();
