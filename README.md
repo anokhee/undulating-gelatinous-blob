@@ -20,7 +20,13 @@ function change(part, attr, min, max, deltaMin, deltaMax, x) {
 }
 </pre>
 
-Results (gradient randomizes upon refresh): 
+## Blobs
 
-<img width="45%" src="demo1.gif">
-<img width="45%" src="demo2.gif">
+<img width="100%" src="imgs/blob-a.gif">
+<img width="100%" src="imgs/blob-b.gif">
+
+## Another use 
+
+<img width="50%" src="imgs/waves.gif">
+
+
