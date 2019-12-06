@@ -1,61 +1,81 @@
+// Turns #draw-face into a canvas element of sorts
 var elem = document.getElementById('draw-face');
 var two = new Two({
+    width: 600,
+    height: 500
 
 }).appendTo(elem);
 
-elem.style.border = "10px solid black";
-elem.style.background = '#2f5a5c';
-
+// Decides initial increase/decrease of the change() function
 function getRandomBoolean() {
     var randomNumber = Math.random() >= 0.5;
     return randomNumber;
 }
 
+// Contains all numerical data for the blob's appearance
 var body = {
+    shouldChange: true,
+    shouldNotChange: false,
     head: {
-        shouldChangeWidth: true,
-        shouldChangeHeight: false,
         draw: two.makeCurve(
-            250, 50, // 0
-            50, 100, // 1 
-            100, 300, // 2
-            180, 430, // 3
-            250, 450, // 4
-            320, 430, // 5
-            400, 300, // 6
-            450, 100, // 7
-            250, 50, // 8
+            230, 50,
+            50, 100,
+            75, 200,
+            100, 300,
+            140, 365,
+            180, 430,
+            250, 450,
+            320, 430,
+            360, 365,
+            400, 300,
+            425, 200,
+            450, 100,
+            280, 50,
             false)
     },
     eyes: {
         left: {
             draw: two.makeEllipse(250 - 100, 250 - 50, 30, 30),
-            pupil: two.makeCircle(250 - 100, 250 - 50, 10)
+            pupil: two.makeCircle(250 - 100, 250 - 50, 15, 15),
+            eyebrow: two.makeCurve(
+                170 - 50, 150, // 0 
+                170 - 25, 140, // 1
+                170, 138, // 2
+                170 + 25, 140, // 3
+                170 + 50, 150, // 4
+                true
+            )
+
         },
         right: {
             draw: two.makeEllipse(250 + 100, 250 - 50, 30, 30),
-            pupil: two.makeCircle(250 + 100, 250 - 50, 10, 10)
+            pupil: two.makeCircle(250 + 100, 250 - 50, 15, 15),
+            eyebrow: two.makeCurve(
+                330 - 60, 150, // 0 
+                330 - 25, 140, // 1
+                330, 138, // 2
+                330 + 25, 140, // 3
+                330 + 60, 150, // 4
+                true
+            )
 
         }
-    }
+    },
 }
 
+// Draws the blob shape + its eyes 
+
 let head = body.head.draw;
-head.linewidth = 10;
-head.fill = '#1faabc';
 
-
-
-let leftEye = two.makeGroup(body.eyes.left.draw, body.eyes.left.pupil);
-let rightEye = two.makeGroup(body.eyes.right.draw, body.eyes.right.pupil);
-
-leftEye.linewidth = 10;
-rightEye.linewidth = 10;
+let leftEye = two.makeGroup(body.eyes.left.draw, body.eyes.left.pupil, body.eyes.left.eyebrow);
+let rightEye = two.makeGroup(body.eyes.right.draw, body.eyes.right.pupil, body.eyes.right.eyebrow);
 leftEye.children[1].fill = 'black';
 rightEye.children[1].fill = 'black';
 
-
-
+let faceGroup = two.makeGroup(head, leftEye, rightEye);
+faceGroup.translation.x += 100;
+faceGroup.translation.y += 50;
+faceGroup.scale = .8;
 
 function change(part, attr, min, max, deltaMin, deltaMax, x) {
     let delta = Math.random() * (deltaMax - deltaMin) + deltaMin;
@@ -73,29 +93,10 @@ function change(part, attr, min, max, deltaMin, deltaMax, x) {
     }
 }
 
+// Animation loop
 two.bind('update', function (frameCount) {
+    animateEyes();
+    animateHead();
 
-    change(head.vertices[1], "x", parseInt(-230), parseInt(-100), parseInt(1), parseInt(1), body.head.shouldChangeWidth);
-    change(head.vertices[7], "x", parseInt(100), parseInt(200), parseInt(1), parseInt(1), body.head.shouldChangeHeight);
-    change(head.vertices[0], "x", parseInt(-50), parseInt(20), parseInt(1), parseInt(1), body.head.shouldChangeWidth);
-    change(head.vertices[8], "x", parseInt(20), parseInt(50), parseInt(1), parseInt(1), body.head.shouldChangeWidth);
-    change(head.vertices[2], "x", parseInt(-200), parseInt(-100), parseInt(1), parseInt(1), body.head.shouldChangeWidth);
-    change(head.vertices[6], "x", parseInt(100), parseInt(230), parseInt(1), parseInt(1), body.head.shouldChangeHeight);
-    change(head.vertices[3], "x", parseInt(-200), parseInt(-100), parseInt(1), parseInt(.5), body.head.shouldChangeWidth);
-    change(head.vertices[5], "x", parseInt(100), parseInt(230), parseInt(1), parseInt(.5), body.head.shouldChangeHeight);
-    change(head.vertices[1], "y", parseInt(-250), parseInt(20), parseInt(1), parseInt(.5), body.head.shouldChangeHeight);
-    change(head.vertices[7], "y", parseInt(-250), parseInt(20), parseInt(1), parseInt(.5), body.head.shouldChangeHeight);
-    change(head.vertices[4], "y", parseInt(100), parseInt(250), parseInt(0), parseInt(1), body.head.shouldChangeWidth);
-
-    change(leftEye.translation, "x", -50, 50, 0, 1, body.head.shouldChangeWidth);
-    change(leftEye.translation, "y", -50, 50, 0, 1, body.head.shouldChangeWidth);
-
-    change(rightEye.translation, "x", 0, 50, 0, 1, body.head.shouldChangeHeight);
-    change(rightEye.translation, "y", 0, 50, 0, 1, body.head.shouldChangeHeight);
-
-    
-}).play(); // Finally, start the animation loop
-
-
-
+}).play();
 two.update();
