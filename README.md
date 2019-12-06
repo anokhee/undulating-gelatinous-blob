@@ -25,8 +25,5 @@ function change(part, attr, min, max, deltaMin, deltaMax, x) {
 <img width="100%" src="imgs/blob-a.gif">
 <img width="100%" src="imgs/blob-b.gif">
 
-## Another use 
-
-<img width="50%" src="imgs/waves.gif">
 
 
