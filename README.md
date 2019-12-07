@@ -1,6 +1,6 @@
 # Undulating, Gelatinous Blob
 
-An experimental personal code project to create some kind of 2D physics engine to achieve a 'blobby' effect. This is the function I came up with to create random animation: 
+Blobby effect using helper functions from <a href="https://two.js.org/">the Two.js library</a>. 
 
 <pre>
 function change(part, attr, min, max, deltaMin, deltaMax, x) {
